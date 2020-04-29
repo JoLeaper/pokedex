@@ -15,7 +15,13 @@ export default class App extends Component {
     this.setState({
       displayOrder: event.target.value
     })
-    console.log(event.target.value)
+  }
+
+  handleNameChange = (event) => {
+    this.setState({
+      pokemonName: event.target.value
+    })
+    console.log(event.target.value);
   }
 
   render() {
@@ -24,7 +30,7 @@ export default class App extends Component {
         <Header />
         <div className='search'>
           <div className='searchbox'>
-            <input>
+            <input value={this.state.pokemonName} onChange={this.handleNameChange}>
             </input>
               <select value={this.state.displayOrder} onChange={this.handleOrderChange}>
                 <option value='asc'>Ascending</option>
