@@ -10,7 +10,7 @@ export default class App extends Component {
     pokemonName: '',
     pokemonType: '',
     pokemonAttack: 0,
-    pokemon:[]
+    pokemon: []
   }
 
   handleOrderChange = (event) => {
@@ -26,8 +26,10 @@ export default class App extends Component {
   }
 
   handleClick = async () => {
-    const fetchedPokemon = await request.get(`https://alchemy-pokedex.herokuapp.com/api/pokedex?search=${this.state.PokemonName}`)
-    this.setState({ pokemon: fetchedPokemon.body })
+    const searchedPokemon = this.state.pokemonName;
+    const fetchedPokemon = await request.get(`https://alchemy-pokedex.herokuapp.com/api/pokedex?pokemon=${searchedPokemon}`)
+    this.setState({ pokemon: fetchedPokemon.body.results })
+    console.log(this.state.pokemon.results)
   }
 
   render() {
@@ -36,7 +38,7 @@ export default class App extends Component {
         <Header />
         <div className='search'>
           <div className='searchbox'>
-            <input value={this.state.pokemonName} onChange={this.handleNameChange}>
+            <input value={this.state.PokemonName} onChange={this.handleNameChange}>
             </input>
               <select value={this.state.displayOrder} onChange={this.handleOrderChange}>
                 <option value='asc'>Ascending</option>
@@ -45,7 +47,7 @@ export default class App extends Component {
               </select>
               <button onClick={this.handleClick}>Search</button>
         </div>
-          <SearchResults pokemonResults={this.state.pokemon}/>
+          <SearchResults pokemonList={this.state.pokemon}/>
         </div>
       </div>
     )

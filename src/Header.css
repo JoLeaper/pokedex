@@ -8,12 +8,12 @@
 }
 
 .title {
-    position: fixed;
-    left: 2%;
+    display: flex;
+    justify-content: flex-start;
 
 }
 
 .nav {
-    position: fixed;
-    right: 2%;
+    display: flex;
+    justify-content: flex-end;
 }
