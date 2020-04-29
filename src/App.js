@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import Header from './Header.js'
 import SearchResults from './SearchResults.js'
+import request from 'superagent';
 import './App.css'
 
 export default class App extends Component {
@@ -8,7 +9,8 @@ export default class App extends Component {
     displayOrder: 'asc',
     pokemonName: '',
     pokemonType: '',
-    PokemonAttack: 0,
+    pokemonAttack: 0,
+    pokemon:[]
   }
 
   handleOrderChange = (event) => {
@@ -21,7 +23,11 @@ export default class App extends Component {
     this.setState({
       pokemonName: event.target.value
     })
-    console.log(event.target.value);
+  }
+
+  handleClick = async () => {
+    const fetchedPokemon = await request.get(`https://alchemy-pokedex.herokuapp.com/api/pokedex?search=${this.state.PokemonName}`)
+    this.setState({ pokemon: fetchedPokemon.body })
   }
 
   render() {
@@ -37,8 +43,9 @@ export default class App extends Component {
                 <option value='desc'>Descending</option>
                 
               </select>
+              <button onClick={this.handleClick}>Search</button>
         </div>
-          <SearchResults />
+          <SearchResults pokemonResults={this.state.pokemon}/>
         </div>
       </div>
     )
