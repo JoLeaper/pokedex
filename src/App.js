@@ -5,9 +5,17 @@ import './App.css'
 
 export default class App extends Component {
   state = {
+    displayOrder: 'asc',
     pokemonName: '',
     pokemonType: '',
     PokemonAttack: 0,
+  }
+
+  handleOrderChange = (event) => {
+    this.setState({
+      displayOrder: event.target.value
+    })
+    console.log(event.target.value)
   }
 
   render() {
@@ -18,9 +26,10 @@ export default class App extends Component {
           <div className='searchbox'>
             <input>
             </input>
-              <select option>
+              <select value={this.state.displayOrder} onChange={this.handleOrderChange}>
                 <option value='asc'>Ascending</option>
                 <option value='desc'>Descending</option>
+                
               </select>
         </div>
           <SearchResults />
