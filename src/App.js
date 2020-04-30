@@ -8,7 +8,7 @@ export default class App extends Component {
   state = {
     displayOrder: 'asc',
     pokemonName: '',
-    pokemonType: ['normal', 'fire', 'fighting', 'water', 'flying', 'grass', 'poison', 'electric', 'ground', 'psychic', 'rock', 'ice', 'bug', 'dragon', 'ghost', 'dark', 'steel', 'fairy'],
+    pokemonType: ['none', 'normal', 'fire', 'fighting', 'water', 'flying', 'grass', 'poison', 'electric', 'ground', 'psychic', 'rock', 'ice', 'bug', 'dragon', 'ghost', 'dark', 'steel', 'fairy'],
     desiredPokemonType: '',
     pokemonAttack: 0,
     pokemon: []
@@ -34,12 +34,22 @@ export default class App extends Component {
     })
   }
 
+  handleAttackChange = (event) => {
+    this.setState({
+      pokemonAttack: event.target.value
+    })
+  }
+
   handleClick = async () => {
     const searchedPokemon = this.state.pokemonName;
-    const wantedType = this.state.desiredPokemonType;
-    const fetchedPokemon = await request.get(`https://alchemy-pokedex.herokuapp.com/api/pokedex?pokemon=${searchedPokemon}&type=${wantedType}`)
+    const minAttack = this.state.pokemonAttack;
+    let wantedType;
+    if (this.state.desiredPokemonType !== 'none') {
+      wantedType='&type=' + this.state.desiredPokemonType
+    }
+
+    const fetchedPokemon = await request.get(`https://alchemy-pokedex.herokuapp.com/api/pokedex?pokemon=${searchedPokemon}${wantedType}&attack=${minAttack}&sort=id&direction=${this.state.displayOrder}`)
     this.setState({ pokemon: fetchedPokemon.body.results })
-    console.log(fetchedPokemon)
   }
 
   render() {
@@ -48,14 +58,16 @@ export default class App extends Component {
         <Header />
         <div className='search'>
           <div className='searchbox'>
+            Name:
             <input value={this.state.PokemonName} onChange={this.handleNameChange}>
             </input>
+              Display Order (By Pokedex Number):
               <select value={this.state.displayOrder} onChange={this.handleOrderChange}>
-                <option value='asc'>Ascending</option>
-                <option value='desc'>Descending</option>
+                <option value='asc'>Early Pokemon</option>
+                <option value='desc'>Later Pokemon</option>
                 
               </select>
-
+              Type:
               <select onChange={this.handleTypeChange}>
                 {
                 this.state.pokemonType.map(type => 
@@ -64,6 +76,8 @@ export default class App extends Component {
                  }
               </select>
 
+              Minimum Attack Of:<input value={this.state.pokemonAttack} onChange={this.handleAttackChange}>
+              </input>
               <button onClick={this.handleClick}>Search</button>
         </div>
         
