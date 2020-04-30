@@ -1,8 +1,7 @@
 .searchresults {
-    width: 80%;
     background-color: blue;
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr
 }
 
 img {
@@ -12,12 +11,21 @@ img {
 
 .singularPokemon {
     border: 2px solid black;
-    background-color: white;
-    margin: 10px;
+    background-color: lightgray;
+    margin: 0px;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     text-align: center;
-    width: 300px;
+    width: 200px;
+    height: 400px;
 }
 
+p {
+    margin: 0;
+}
+
+li {
+    margin: 0;
+}
