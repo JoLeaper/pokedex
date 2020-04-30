@@ -9,3 +9,10 @@
     height: 750px;
     flex-direction: column
 }
+
+.resultsBox {
+    width: 80%;
+    background-color: blue;
+    display: grid;
+    grid-template-columns: 1fr 1fr
+}

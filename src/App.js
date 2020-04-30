@@ -8,7 +8,8 @@ export default class App extends Component {
   state = {
     displayOrder: 'asc',
     pokemonName: '',
-    pokemonType: '',
+    pokemonType: ['normal', 'fire', 'fighting', 'water', 'flying', 'grass', 'poison', 'electric', 'ground', 'psychic', 'rock', 'ice', 'bug', 'dragon', 'ghost', 'dark', 'steel', 'fairy'],
+    desiredPokemonType: '',
     pokemonAttack: 0,
     pokemon: []
   }
@@ -19,6 +20,14 @@ export default class App extends Component {
     })
   }
 
+  handleTypeChange = (event) => {
+    this.setState({
+      desiredPokemonType: event.target.value
+      
+    })
+    console.log(this.state.pokemonType)
+  }
+
   handleNameChange = (event) => {
     this.setState({
       pokemonName: event.target.value
@@ -27,9 +36,10 @@ export default class App extends Component {
 
   handleClick = async () => {
     const searchedPokemon = this.state.pokemonName;
-    const fetchedPokemon = await request.get(`https://alchemy-pokedex.herokuapp.com/api/pokedex?pokemon=${searchedPokemon}`)
+    const wantedType = this.state.desiredPokemonType;
+    const fetchedPokemon = await request.get(`https://alchemy-pokedex.herokuapp.com/api/pokedex?pokemon=${searchedPokemon}&type=${wantedType}`)
     this.setState({ pokemon: fetchedPokemon.body.results })
-    console.log(this.state.pokemon.results)
+    console.log(fetchedPokemon)
   }
 
   render() {
@@ -45,9 +55,21 @@ export default class App extends Component {
                 <option value='desc'>Descending</option>
                 
               </select>
+
+              <select onChange={this.handleTypeChange}>
+                {
+                this.state.pokemonType.map(type => 
+                <option value={type}>{type}</option>
+                 )
+                 }
+              </select>
+
               <button onClick={this.handleClick}>Search</button>
         </div>
+        
           <SearchResults pokemonList={this.state.pokemon}/>
+
+
         </div>
       </div>
     )
