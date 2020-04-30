@@ -8,11 +8,15 @@ export default class App extends Component {
   state = {
     displayOrder: 'asc',
     pokemonName: '',
-    pokemonType: ['none', 'normal', 'fire', 'fighting', 'water', 'flying', 'grass', 'poison', 'electric', 'ground', 'psychic', 'rock', 'ice', 'bug', 'dragon', 'ghost', 'dark', 'steel', 'fairy'],
+    pokemonType: [' ', 'normal', 'fire', 'fighting', 'water', 'flying', 'grass', 'poison', 'electric', 'ground', 'psychic', 'rock', 'ice', 'bug', 'dragon', 'ghost', 'dark', 'steel', 'fairy'],
     desiredPokemonType: '',
     pokemonAttack: 0,
     pokemon: []
   }
+  componentDidMount = async () => {
+    const fetchedPokemon = await request.get(`https://alchemy-pokedex.herokuapp.com/api/pokedex`);
+    this.setState({ pokemon: fetchedPokemon.body.results })
+}
 
   handleOrderChange = (event) => {
     this.setState({
@@ -35,9 +39,12 @@ export default class App extends Component {
   }
 
   handleAttackChange = (event) => {
-    this.setState({
-      pokemonAttack: event.target.value
-    })
+      const re = /^[0-9\b]+$/;
+      if (event.target.value === '' || re.test(event.target.value)) {
+         this.setState({
+          pokemonAttack: event.target.value
+         })
+      }
   }
 
   handleClick = async () => {
@@ -75,8 +82,7 @@ export default class App extends Component {
                  )
                  }
               </select>
-
-              Minimum Attack Of:<input value={this.state.pokemonAttack} onChange={this.handleAttackChange}>
+                Minimum Attack Of:<input value={this.state.pokemonAttack} onChange={this.handleAttackChange}>
               </input>
               <button onClick={this.handleClick}>Search</button>
         </div>
