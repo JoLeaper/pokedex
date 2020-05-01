@@ -3,3 +3,5 @@
 exports[`renders learn react link 1`] = `ShallowWrapper {}`;
 
 exports[`renders learn react link 2`] = `ShallowWrapper {}`;
+
+exports[`renders learn react link 3`] = `ShallowWrapper {}`;

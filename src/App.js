@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import {BrowserRouter as Route, Switch} from 'react-router-dom'
+import { Route, Switch} from 'react-router-dom'
 import SearchPage from './SearchPage.js'
 import Header from './Header.js'
 import PokemonDetail from './PokemonDetail.js'
@@ -13,8 +13,7 @@ export default class App extends Component {
                 <div className ='searchBox'>
                 <Switch>
                     <Route
-                    path ="/"
-                    exact
+                    path="/home"
                     render={(routerProps) => <SearchPage {...routerProps} />}
                     />
                     <Route
@@ -22,12 +21,6 @@ export default class App extends Component {
                     render={(routerProps) => <PokemonDetail {...routerProps} />}
                     />
                 </Switch>
-
-                    {/* <Route
-                    path ="/search"
-                    render={(routerProps) => <SearchPage {...routerProps} />}
-                    /> */}
-
                 </div>
             </div>
         )

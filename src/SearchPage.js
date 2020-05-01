@@ -12,7 +12,8 @@ export default class App extends Component {
     desiredPokemonType: '',
     pokemonAttack: 0,
     pokemon: [],
-    page: 1
+    page: 1,
+    link: 'https://alchemy-pokedex.herokuapp.com/api/pokedex?'
   }
   componentDidMount = async () => {
     const fetchedPokemon = await request.get(`https://alchemy-pokedex.herokuapp.com/api/pokedex`);
@@ -37,6 +38,18 @@ export default class App extends Component {
     })
   }
 
+  handlePageChange = (event) => {
+    let currentPage = this.state.page;
+    if (event.target.value === 'next') {
+      currentPage++;
+    } else {
+      currentPage--;
+    }
+    this.setState({
+      page: currentPage
+    })
+  }
+
   handleAttackChange = (event) => {
       const re = /^[0-9\b]+$/;
       if (event.target.value === '' || re.test(event.target.value)) {
@@ -47,21 +60,38 @@ export default class App extends Component {
   }
 
   handleClick = async () => {
-    console.log('hello');
-    const searchedPokemon = this.state.pokemonName;
-    const minAttack = this.state.pokemonAttack;
+    let link = 'https://alchemy-pokedex.herokuapp.com/api/pokedex?' 
+    const currentPage = 'page=' + this.state.page;
+    const searchedPokemon = 'pokemon=' + this.state.pokemonName;
+    const minAttack = 'attack=' + this.state.pokemonAttack;
+    
     let wantedType;
     if (this.state.desiredPokemonType !== 'none') {
-      wantedType='&type=' + this.state.desiredPokemonType
+      wantedType='type=' + this.state.desiredPokemonType
     }
-    const fetchedPokemon = await request.get(`https://alchemy-pokedex.herokuapp.com/api/pokedex?pokemon=${searchedPokemon}${wantedType}&attack=${minAttack}&sort=id&direction=${this.state.displayOrder}`)
+    link = `${link}&${currentPage}&${searchedPokemon}&${minAttack}&${wantedType}`
+    console.log(link);
+    const fetchedPokemon = await request.get(`${link}`)
     this.setState({ pokemon: fetchedPokemon.body.results })
+  }
+
+  handlePageClick = (event) => {
+    const currentPage = this.state.page;
+    if(event.target.value === 'next' && currentPage < this.state.pokemon.length) {
+      this.setState(prevState => ({ page: prevState.page + 1 }))
+    }
+
+    if(event.target.value === 'prev' && currentPage > 1) {
+      this.setState(prevState => ({ page: prevState.page - 1 }))
+    }
+
+    this.handleClick();
   }
 
   render() {
     return (
       <div className='search'>
-        <SearchBar handleClick={this.handleClick} handleOrderChange={this.handleOrderChange} handleTypeChange={this.handleTypeChange} handleNameChange={this.handleNameChange} handleAttackChange={this.handleAttackChange} pokemonType={this.state.pokemonType} pokemonName={this.state.pokemonName} pokemonAttack={this.state.pokemonAttack} displayOrder={this.state.displayOrder}/>
+        <SearchBar handlePageClick={this.handlePageClick} handleClick={this.handleClick} handleOrderChange={this.handleOrderChange} handleTypeChange={this.handleTypeChange} handleNameChange={this.handleNameChange} handleAttackChange={this.handleAttackChange} pokemonType={this.state.pokemonType} pokemonName={this.state.pokemonName} pokemonAttack={this.state.pokemonAttack} displayOrder={this.state.displayOrder}/>
         <SearchResults pokemonList={this.state.pokemon}/>
       </div>
     )

@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import request from 'superagent';
+import './PokemonDetail.css'
 
 export default class PokemonDetail extends Component {
     state = {
@@ -10,13 +11,11 @@ export default class PokemonDetail extends Component {
         const fetchedPokemon = await request.get(`https://alchemy-pokedex.herokuapp.com/api/pokedex/${pokemonId}`);
         this.setState({
             pokemon: fetchedPokemon.body
-        }
-        )
-        console.log(this.state.pokemon);
+        })
     }
     render() {
         return this.state.pokemon ?
-            <div>
+            <div className ='detailPokemon'>
                 <h2>{this.state.pokemon.pokemon}</h2>
                 <img src={this.state.pokemon.url_image} alt={this.state.pokemon.pokemon} />
                 <p>Type: {this.state.pokemon.type_1}  {(this.state.pokemon.type_2 === 'NA')
