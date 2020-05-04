@@ -14,23 +14,21 @@ export default class App extends Component {
     pokemon: [],
     page: 1,
     body: [],
-    link: 'https://alchemy-pokedex.herokuapp.com/api/pokedex?'
+    link: 'https://alchemy-pokedex.herokuapp.com/api/pokedex?',
+    searchQuery: ''
   }
   componentDidMount = async () => {
     const searchParams = new URLSearchParams(window.location.search);
     const query = searchParams.get('search');
-    console.log(query);
     this.setState ({searchQuery: query});
     if (query) {
       let page = 1;
       if (searchParams.get('page')){
         page = searchParams.get('page');
       }
+      const fetchedPokemon = await request.get(`https://alchemy-pokedex.herokuapp.com/api/pokedex?pokemon=${query}&${page}`);
+      this.setState({ body: fetchedPokemon.body, pokemon: fetchedPokemon.body.results });
     }
-
-    const fetchedPokemon = await request.get(`https://alchemy-pokedex.herokuapp.com/api/pokedex`);
-    this.setState({ body: fetchedPokemon.body, pokemon: fetchedPokemon.body.results });
-    
 }
 
   handleOrderChange = (event) => {
@@ -86,9 +84,9 @@ export default class App extends Component {
       wantedType = '';
     }
     link = `${link}${currentPage}${searchedPokemon}${minAttack}${wantedOrder}${wantedType}`
-    console.log(link);
     const fetchedPokemon = await request.get(`${link}`)
     this.setState({body: fetchedPokemon.body, pokemon: fetchedPokemon.body.results, link: link })
+
   }
 
   handlePageClick = (event) => {
