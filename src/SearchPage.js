@@ -32,6 +32,9 @@ export default class App extends Component {
       }
       const fetchedPokemon = await request.get(`https://alchemy-pokedex.herokuapp.com/api/pokedex?pokemon=${query}&page=${page}`);
       this.setState({ body: fetchedPokemon.body, pokemon: fetchedPokemon.body.results });
+    } else {
+      const fetchedPokemon = await request.get(`https://alchemy-pokedex.herokuapp.com/api/pokedex`);
+      this.setState({ body: fetchedPokemon.body, pokemon: fetchedPokemon.body.results })
     }
 }
 
