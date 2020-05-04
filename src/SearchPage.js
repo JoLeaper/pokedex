@@ -14,19 +14,23 @@ export default class App extends Component {
     pokemon: [],
     page: 1,
     body: [],
-    link: 'https://alchemy-pokedex.herokuapp.com/api/pokedex?',
+    link: 'https://alchemy-pokedex.herokuapp.com/api/pokedex',
     searchQuery: ''
   }
   componentDidMount = async () => {
+    // grabs everything after question mark in URL
     const searchParams = new URLSearchParams(window.location.search);
-    const query = searchParams.get('search');
+    // ?pokemon=${query}&page=${page}
+    //looks for pokemon key in url, sets value equal to query
+    const query = searchParams.get('pokemon');
+    // 
     this.setState ({searchQuery: query});
     if (query) {
       let page = 1;
       if (searchParams.get('page')){
         page = searchParams.get('page');
       }
-      const fetchedPokemon = await request.get(`https://alchemy-pokedex.herokuapp.com/api/pokedex?pokemon=${query}&${page}`);
+      const fetchedPokemon = await request.get(`https://alchemy-pokedex.herokuapp.com/api/pokedex?pokemon=${query}&page=${page}`);
       this.setState({ body: fetchedPokemon.body, pokemon: fetchedPokemon.body.results });
     }
 }
@@ -45,7 +49,7 @@ export default class App extends Component {
 
   handleNameChange = (event) => {
     this.setState({
-      pokemonName: event.target.value
+      searchQuery: event.target.value
     })
   }
 
@@ -105,7 +109,7 @@ export default class App extends Component {
   render() {
     return (
       <div className='search'>
-        <SearchBar handlePageClick={this.handlePageClick} handleClick={this.handleClick} handleOrderChange={this.handleOrderChange} handleTypeChange={this.handleTypeChange} handleNameChange={this.handleNameChange} handleAttackChange={this.handleAttackChange} pokemonType={pokemonType} pokemonName={this.state.pokemonName} pokemonAttack={this.state.pokemonAttack} displayOrder={this.state.displayOrder}/>
+        <SearchBar handlePageClick={this.handlePageClick} handleClick={this.handleClick} handleOrderChange={this.handleOrderChange} handleTypeChange={this.handleTypeChange} handleNameChange={this.handleNameChange} handleAttackChange={this.handleAttackChange} pokemonType={pokemonType} pokemonName={this.state.searchQuery} pokemonAttack={this.state.pokemonAttack} displayOrder={this.state.displayOrder}/>
         <SearchResults pokemonList={this.state.pokemon}/>
       </div>
     )

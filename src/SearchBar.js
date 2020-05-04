@@ -6,7 +6,7 @@ export default class SearchBar extends Component {
         return (
             <div className='searchbox'>
             Name:
-            <input value={this.props.PokemonName} onChange={this.props.handleNameChange}>
+            <input value={this.props.pokemonName} onChange={this.props.handleNameChange}>
             </input>
               Display Order (By Pokedex Number):
               <select value={this.props.displayOrder} onChange={this.props.handleOrderChange}>
