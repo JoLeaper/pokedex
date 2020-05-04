@@ -13,7 +13,7 @@ export default class App extends Component {
                 <div className ='searchBox'>
                 <Switch>
                     <Route
-                    path="/home"
+                    path="/"
                     render={(routerProps) => <SearchPage {...routerProps} />}
                     />
                     <Route
