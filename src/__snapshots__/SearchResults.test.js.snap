@@ -1,0 +1,47 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders search results 1`] = `
+<div
+  className="searchresults"
+>
+  <li
+    className="singularPokemon"
+  >
+    <Link
+      to="/pokemon/undefined"
+    >
+      <h2 />
+    </Link>
+    <img />
+    <p>
+      Type: 
+        
+      / undefined
+    </p>
+    <p>
+      Ability: 
+    </p>
+    <p>
+      Hidden Ability: 
+    </p>
+    <p>
+      Base HP: 
+    </p>
+    <p>
+      Base Attack: 
+    </p>
+    <p>
+      Base Defense: 
+    </p>
+    <p>
+      Base Special Attack: 
+    </p>
+    <p>
+      Base Special Defense: 
+    </p>
+    <p>
+      Base Speed: 
+    </p>
+  </li>
+</div>
+`;

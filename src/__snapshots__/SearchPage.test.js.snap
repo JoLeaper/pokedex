@@ -1,0 +1,47 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders search page 1`] = `
+<div
+  className="search"
+>
+  <SearchBar
+    displayOrder="asc"
+    handleAttackChange={[Function]}
+    handleClick={[Function]}
+    handleNameChange={[Function]}
+    handleOrderChange={[Function]}
+    handlePageClick={[Function]}
+    handleSortChange={[Function]}
+    handleTypeChange={[Function]}
+    pokemonAttack={0}
+    pokemonName={null}
+    pokemonType={
+      Array [
+        "",
+        "normal",
+        "fire",
+        "fighting",
+        "water",
+        "flying",
+        "grass",
+        "poison",
+        "electric",
+        "ground",
+        "psychic",
+        "rock",
+        "ice",
+        "bug",
+        "dragon",
+        "ghost",
+        "dark",
+        "steel",
+        "fairy",
+      ]
+    }
+    sortBy="id"
+  />
+  <SearchResults
+    pokemonList={Array []}
+  />
+</div>
+`;

@@ -1,0 +1,17 @@
+.search {
+    display: flex;
+}
+
+.searchbox {
+    display: flex;
+    background-color: gray;
+    width: 20%;
+    height: auto;
+    flex-direction: column
+}
+
+.resultsBox {
+    width: 80%;
+    display: grid;
+    grid-template-columns: 1fr
+}

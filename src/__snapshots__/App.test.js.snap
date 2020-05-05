@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`creates the app 1`] = `
+<div
+  className="container"
+>
+  <Header />
+  <div
+    className="searchBox"
+  >
+    <Switch>
+      <Route
+        path="/"
+        render={[Function]}
+      />
+      <Route
+        path="/pokemon/:id"
+        render={[Function]}
+      />
+    </Switch>
+  </div>
+</div>
+`;

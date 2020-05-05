@@ -1,0 +1,19 @@
+.header{
+    background-color: red;
+    color: white;
+    height: 100px;
+    padding-top: 1px;
+    margin: 0;
+    position: relative;
+}
+
+.title {
+    display: flex;
+    justify-content: flex-start;
+
+}
+
+.nav {
+    display: flex;
+    justify-content: flex-end;
+}
