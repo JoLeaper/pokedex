@@ -15,7 +15,6 @@ export default class App extends Component {
     page: 1,
     body: [],
     link: 'https://alchemy-pokedex.herokuapp.com/api/pokedex',
-    searchQuery: '',
     sortBy: 'id'
   }
   componentDidMount = async () => {
@@ -25,7 +24,7 @@ export default class App extends Component {
     //looks for pokemon key in url, sets value equal to query
     const query = searchParams.get('pokemon');
     // 
-    this.setState({ searchQuery: query });
+    this.setState({ pokemonName: query });
     if (query) {
       let page = 1;
       if (searchParams.get('page')) {
@@ -56,7 +55,7 @@ export default class App extends Component {
 
   handleNameChange = (event) => {
     this.setState({
-      searchQuery: event.target.value
+      pokemonName: event.target.value
     })
   }
 
@@ -103,6 +102,7 @@ export default class App extends Component {
     }
     link = `${link}${currentPage}${searchedPokemon}${minAttack}${wantedOrder}${wantedType}`
     const fetchedPokemon = await request.get(`${link}`)
+    console.log(fetchedPokemon);
     this.setState({ body: fetchedPokemon.body, pokemon: fetchedPokemon.body.results, link: link })
   }
 
@@ -131,7 +131,7 @@ export default class App extends Component {
           handleNameChange={this.handleNameChange}
           handleAttackChange={this.handleAttackChange}
           pokemonType={pokemonType}
-          pokemonName={this.state.searchQuery}
+          pokemonName={this.state.pokemonName}
           pokemonAttack={this.state.pokemonAttack}
           displayOrder={this.state.displayOrder}
           sortBy={this.state.sortBy} />
