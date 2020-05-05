@@ -1,12 +1,11 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import SearchPage from './SearchPage'
+import PokemonDetail from './PokemonDetail'
 
 test('renders learn react link', () => {
-  const wrapper = shallow(<SearchPage />);
+  const wrapper = shallow(<PokemonDetail />);
   expect(wrapper).toMatchSnapshot();
 });
-
 
 
 

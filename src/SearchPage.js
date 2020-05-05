@@ -15,7 +15,8 @@ export default class App extends Component {
     page: 1,
     body: [],
     link: 'https://alchemy-pokedex.herokuapp.com/api/pokedex',
-    searchQuery: ''
+    searchQuery: '',
+    sortBy: 'id'
   }
   componentDidMount = async () => {
     // grabs everything after question mark in URL
@@ -24,19 +25,22 @@ export default class App extends Component {
     //looks for pokemon key in url, sets value equal to query
     const query = searchParams.get('pokemon');
     // 
-    this.setState ({searchQuery: query});
+    this.setState({ searchQuery: query });
     if (query) {
       let page = 1;
-      if (searchParams.get('page')){
+      if (searchParams.get('page')) {
         page = searchParams.get('page');
       }
       const fetchedPokemon = await request.get(`https://alchemy-pokedex.herokuapp.com/api/pokedex?pokemon=${query}&page=${page}`);
+      console.log(fetchedPokemon);
       this.setState({ body: fetchedPokemon.body, pokemon: fetchedPokemon.body.results });
     } else {
-      const fetchedPokemon = await request.get(`https://alchemy-pokedex.herokuapp.com/api/pokedex`);
+      const fetchedPokemon = await request.get(`https://alchemy-pokedex.herokuapp.com/api/pokedex?sort=id&direction=asc`);
+      console.log(fetchedPokemon);
       this.setState({ body: fetchedPokemon.body, pokemon: fetchedPokemon.body.results })
     }
-}
+
+  }
 
   handleOrderChange = (event) => {
     this.setState({
@@ -56,6 +60,12 @@ export default class App extends Component {
     })
   }
 
+  handleSortChange = (event) => {
+    this.setState({
+      sortBy: event.target.value
+    })
+  }
+
   handlePageChange = (event) => {
     let currentPage = this.state.page;
     if (event.target.value === 'next') {
@@ -69,41 +79,41 @@ export default class App extends Component {
   }
 
   handleAttackChange = (event) => {
-      const re = /^[0-9\b]+$/;
-      if (event.target.value === '' || re.test(event.target.value)) {
-         this.setState({
-          pokemonAttack: event.target.value
-         })
-      }
+    const re = /^[0-9\b]+$/;
+    if (event.target.value === '' || re.test(event.target.value)) {
+      this.setState({
+        pokemonAttack: event.target.value
+      })
+    }
   }
 
   handleClick = async (page) => {
-    let link = 'https://alchemy-pokedex.herokuapp.com/api/pokedex?' 
+    let link = 'https://alchemy-pokedex.herokuapp.com/api/pokedex?'
     const currentPage = '&page=' + page;
-    const wantedOrder = '&sort=id&direction=' + this.state.displayOrder;
+    const sortBy = '&sort=' + this.state.sortBy;
+    const wantedOrder = sortBy + '&direction=' + this.state.displayOrder;
     const searchedPokemon = '&pokemon=' + this.state.pokemonName;
     const minAttack = '&attack=' + this.state.pokemonAttack;
     let wantedType;
 
     if (this.state.desiredPokemonType !== '') {
-      wantedType='&type=' + this.state.desiredPokemonType
+      wantedType = '&type=' + this.state.desiredPokemonType
     } else {
       wantedType = '';
     }
     link = `${link}${currentPage}${searchedPokemon}${minAttack}${wantedOrder}${wantedType}`
     const fetchedPokemon = await request.get(`${link}`)
-    this.setState({body: fetchedPokemon.body, pokemon: fetchedPokemon.body.results, link: link })
-
+    this.setState({ body: fetchedPokemon.body, pokemon: fetchedPokemon.body.results, link: link })
   }
 
   handlePageClick = (event) => {
     const currentPage = this.state.page;
-    if(event.target.value === 'next' && currentPage < Math.ceil(this.state.body.count / this.state.body.perPage)) {
+    if (event.target.value === 'next' && currentPage < Math.ceil(this.state.body.count / this.state.body.perPage)) {
       this.setState(prevState => ({ page: prevState.page + 1 }))
       this.handleClick(this.state.page + 1);
     }
 
-    if(event.target.value === 'prev' && currentPage > 1) {
+    if (event.target.value === 'prev' && currentPage > 1) {
       this.setState(prevState => ({ page: prevState.page - 1 }))
       this.handleClick((this.state.page - 1));
     }
@@ -112,8 +122,22 @@ export default class App extends Component {
   render() {
     return (
       <div className='search'>
-        <SearchBar handlePageClick={this.handlePageClick} handleClick={this.handleClick} handleOrderChange={this.handleOrderChange} handleTypeChange={this.handleTypeChange} handleNameChange={this.handleNameChange} handleAttackChange={this.handleAttackChange} pokemonType={pokemonType} pokemonName={this.state.searchQuery} pokemonAttack={this.state.pokemonAttack} displayOrder={this.state.displayOrder}/>
-        <SearchResults pokemonList={this.state.pokemon}/>
+        <SearchBar
+          handleSortChange={this.handleSortChange}
+          handlePageClick={this.handlePageClick}
+          handleClick={this.handleClick}
+          handleOrderChange={this.handleOrderChange}
+          handleTypeChange={this.handleTypeChange}
+          handleNameChange={this.handleNameChange}
+          handleAttackChange={this.handleAttackChange}
+          pokemonType={pokemonType}
+          pokemonName={this.state.searchQuery}
+          pokemonAttack={this.state.pokemonAttack}
+          displayOrder={this.state.displayOrder}
+          sortBy={this.state.sortBy} />
+
+        <SearchResults
+          pokemonList={this.state.pokemon} />
       </div>
     )
   }
