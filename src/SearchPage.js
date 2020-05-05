@@ -31,11 +31,9 @@ export default class App extends Component {
         page = searchParams.get('page');
       }
       const fetchedPokemon = await request.get(`https://alchemy-pokedex.herokuapp.com/api/pokedex?pokemon=${query}&page=${page}`);
-      console.log(fetchedPokemon);
       this.setState({ body: fetchedPokemon.body, pokemon: fetchedPokemon.body.results });
     } else {
       const fetchedPokemon = await request.get(`https://alchemy-pokedex.herokuapp.com/api/pokedex?sort=id&direction=asc`);
-      console.log(fetchedPokemon);
       this.setState({ body: fetchedPokemon.body, pokemon: fetchedPokemon.body.results })
     }
 
@@ -101,8 +99,7 @@ export default class App extends Component {
       wantedType = '';
     }
     link = `${link}${currentPage}${searchedPokemon}${minAttack}${wantedOrder}${wantedType}`
-    const fetchedPokemon = await request.get(`${link}`)
-    console.log(fetchedPokemon);
+    const fetchedPokemon = await request.get(`${link}`);
     this.setState({ body: fetchedPokemon.body, pokemon: fetchedPokemon.body.results, link: link })
   }
 
