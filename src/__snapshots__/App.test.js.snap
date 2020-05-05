@@ -1,45 +1,23 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`renders learn react link 1`] = `
+exports[`creates the app 1`] = `
 <div
-  className="search"
+  className="container"
 >
-  <SearchBar
-    displayOrder="asc"
-    handleAttackChange={[Function]}
-    handleClick={[Function]}
-    handleNameChange={[Function]}
-    handleOrderChange={[Function]}
-    handlePageClick={[Function]}
-    handleTypeChange={[Function]}
-    pokemonAttack={0}
-    pokemonName={null}
-    pokemonType={
-      Array [
-        "",
-        "normal",
-        "fire",
-        "fighting",
-        "water",
-        "flying",
-        "grass",
-        "poison",
-        "electric",
-        "ground",
-        "psychic",
-        "rock",
-        "ice",
-        "bug",
-        "dragon",
-        "ghost",
-        "dark",
-        "steel",
-        "fairy",
-      ]
-    }
-  />
-  <SearchResults
-    pokemonList={Array []}
-  />
+  <Header />
+  <div
+    className="searchBox"
+  >
+    <Switch>
+      <Route
+        path="/"
+        render={[Function]}
+      />
+      <Route
+        path="/pokemon/:id"
+        render={[Function]}
+      />
+    </Switch>
+  </div>
 </div>
 `;

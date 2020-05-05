@@ -1,0 +1,123 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders searchbar 1`] = `
+<div
+  className="searchbox"
+>
+  Name:
+  <input />
+  <SortSelector />
+  Type:
+  <select>
+    <option
+      value=""
+    />
+    <option
+      value="normal"
+    >
+      normal
+    </option>
+    <option
+      value="fire"
+    >
+      fire
+    </option>
+    <option
+      value="fighting"
+    >
+      fighting
+    </option>
+    <option
+      value="water"
+    >
+      water
+    </option>
+    <option
+      value="flying"
+    >
+      flying
+    </option>
+    <option
+      value="grass"
+    >
+      grass
+    </option>
+    <option
+      value="poison"
+    >
+      poison
+    </option>
+    <option
+      value="electric"
+    >
+      electric
+    </option>
+    <option
+      value="ground"
+    >
+      ground
+    </option>
+    <option
+      value="psychic"
+    >
+      psychic
+    </option>
+    <option
+      value="rock"
+    >
+      rock
+    </option>
+    <option
+      value="ice"
+    >
+      ice
+    </option>
+    <option
+      value="bug"
+    >
+      bug
+    </option>
+    <option
+      value="dragon"
+    >
+      dragon
+    </option>
+    <option
+      value="ghost"
+    >
+      ghost
+    </option>
+    <option
+      value="dark"
+    >
+      dark
+    </option>
+    <option
+      value="steel"
+    >
+      steel
+    </option>
+    <option
+      value="fairy"
+    >
+      fairy
+    </option>
+  </select>
+  Minimum Attack Of:
+  <input />
+  <button>
+    Search
+  </button>
+  <button
+    value="next"
+  >
+    Next Page
+  </button>
+  <button
+    value="prev"
+  >
+    Previous Page
+  </button>
+  <span />
+</div>
+`;

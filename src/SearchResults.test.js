@@ -1,8 +1,9 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import SearchResults from './SearchResults'
+const pokemon = [0];
 
-test('renders learn react link', () => {
-    const wrapper = shallow(<SearchResults />);
+test('renders search results', () => {
+    const wrapper = shallow(<SearchResults pokemonList={pokemon} />);
     expect(wrapper).toMatchSnapshot();
 });

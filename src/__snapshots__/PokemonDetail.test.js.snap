@@ -1,8 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`renders learn react link 1`] = `
-<img
-  alt="loading"
-  src="https://i.giphy.com/media/jQbinPsqqfg8GFxbQw/giphy.webp"
-/>
-`;

@@ -1,176 +1,47 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`renders learn react link 1`] = `
+exports[`renders search page 1`] = `
 <div
-  className="container"
+  className="search"
 >
-  <Header />
-  <div
-    className="searchBox"
-  >
-    <Switch>
-      <Route
-        path="/"
-        render={[Function]}
-      />
-      <Route
-        path="/pokemon/:id"
-        render={[Function]}
-      />
-    </Switch>
-  </div>
-</div>
-`;
-
-exports[`renders learn react link 2`] = `
-<div
-  className="header"
->
-  <h1
-    className="title"
-  >
-    Welcome to the Pokedex!
-  </h1>
-</div>
-`;
-
-exports[`renders learn react link 3`] = `
-<img
-  alt="loading"
-  src="https://i.giphy.com/media/jQbinPsqqfg8GFxbQw/giphy.webp"
-/>
-`;
-
-exports[`renders learn react link 4`] = `
-<div
-  className="searchbox"
->
-  Name:
-  <input />
-  Display Order (By Pokedex Number):
-  <select>
-    <option
-      value="asc"
-    >
-      Early Pokemon
-    </option>
-    <option
-      value="desc"
-    >
-      Later Pokemon
-    </option>
-  </select>
-  Type:
-  <select>
-    <option
-      value=""
-    />
-    <option
-      value="normal"
-    >
-      normal
-    </option>
-    <option
-      value="fire"
-    >
-      fire
-    </option>
-    <option
-      value="fighting"
-    >
-      fighting
-    </option>
-    <option
-      value="water"
-    >
-      water
-    </option>
-    <option
-      value="flying"
-    >
-      flying
-    </option>
-    <option
-      value="grass"
-    >
-      grass
-    </option>
-    <option
-      value="poison"
-    >
-      poison
-    </option>
-    <option
-      value="electric"
-    >
-      electric
-    </option>
-    <option
-      value="ground"
-    >
-      ground
-    </option>
-    <option
-      value="psychic"
-    >
-      psychic
-    </option>
-    <option
-      value="rock"
-    >
-      rock
-    </option>
-    <option
-      value="ice"
-    >
-      ice
-    </option>
-    <option
-      value="bug"
-    >
-      bug
-    </option>
-    <option
-      value="dragon"
-    >
-      dragon
-    </option>
-    <option
-      value="ghost"
-    >
-      ghost
-    </option>
-    <option
-      value="dark"
-    >
-      dark
-    </option>
-    <option
-      value="steel"
-    >
-      steel
-    </option>
-    <option
-      value="fairy"
-    >
-      fairy
-    </option>
-  </select>
-  Minimum Attack Of:
-  <input />
-  <button>
-    Search
-  </button>
-  <button
-    value="next"
-  >
-    Next Page
-  </button>
-  <button
-    value="prev"
-  >
-    Previous Page
-  </button>
-  <span />
+  <SearchBar
+    displayOrder="asc"
+    handleAttackChange={[Function]}
+    handleClick={[Function]}
+    handleNameChange={[Function]}
+    handleOrderChange={[Function]}
+    handlePageClick={[Function]}
+    handleSortChange={[Function]}
+    handleTypeChange={[Function]}
+    pokemonAttack={0}
+    pokemonName={null}
+    pokemonType={
+      Array [
+        "",
+        "normal",
+        "fire",
+        "fighting",
+        "water",
+        "flying",
+        "grass",
+        "poison",
+        "electric",
+        "ground",
+        "psychic",
+        "rock",
+        "ice",
+        "bug",
+        "dragon",
+        "ghost",
+        "dark",
+        "steel",
+        "fairy",
+      ]
+    }
+    sortBy="id"
+  />
+  <SearchResults
+    pokemonList={Array []}
+  />
 </div>
 `;
